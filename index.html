@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cantina da Escola Total</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        #cantina {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .item {
+            margin-bottom: 10px;
+        }
+        .item img {
+            width: 50px; /* Define a largura da imagem */
+            height: 50px; /* Define a altura da imagem */
+        }
+    </style>
+</head>
+<body>
+    <div id="cantina">
+        <h2>Cantina da Escola Total</h2>
+        <form id="pedido">
+            <p>Escolha os itens:</p>
+            <div class="item">
+                <label for="refrigerante">
+                    <input type="checkbox" id="refrigerante" name="item" value="Refrigerante">
+                    <img src="refrigerante.jpeg" alt="Refrigerante">
+                    <br>Refrigerante - R$3,50
+                </label>
+                <br>Quantidade:
+                <input type="number" id="quantidade-refrigerante" name="quantidade-refrigerante" min="0" max="10" value="0">
+            </div>
+            <div class="item">
+                <label for="bolo">
+                    <input type="checkbox" id="bolo" name="item" value="Bolo">
+                    <img src="bolo.jpg" alt="Bolo">
+                    <br>Bolo - R$2,50
+                </label>
+                <br>Quantidade:
+                <input type="number" id="quantidade-bolo" name="quantidade-bolo" min="0" max="10" value="0">
+            </div>
+            <div class="item">
+                <label for="agua">
+                    <input type="checkbox" id="agua" name="item" value="Agua">
+                    <img src="agua.jpeg" alt="Água">
+                    <br>Água - R$2,00
+                </label>
+                <br>Quantidade:
+                <input type="number" id="quantidade-agua" name="quantidade-agua" min="0" max="10" value="0">
+            </div>
+            <br>
+            <button type="submit">Calcular</button>
+        </form>
+        <p id="resultado"></p>
+    </div>
+
+    <script>
+        document.getElementById('pedido').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var items = document.querySelectorAll('input[name="item"]:checked');
+            var valorTotal = 0;
+            var precos = {
+                'Refrigerante': 3.5,
+                'Bolo': 2.5,
+                'Agua': 2
+            };
+
+            items.forEach(function(item) {
+                var quantidadeInput = document.getElementById('quantidade-' + item.value.toLowerCase());
+                var quantidade = parseInt(quantidadeInput.value);
+
+                if (!isNaN(quantidade) && quantidade > 0) {
+                    valorTotal += precos[item.value] * quantidade;
+                }
+            });
+
+            if (valorTotal > 30) {
+                document.getElementById('resultado').textContent = "O valor total excede R$30. Por favor, escolha menos itens.";
+            } else {
+                document.getElementById('resultado').textContent = "O valor total é R$" + valorTotal.toFixed(2);
+            }
+        });
+    </script>
+</body>
+</html>
