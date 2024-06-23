@@ -5,63 +5,179 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cantina da Escola Total</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f0f0f0;
+            background-image: url('https://images.playground.com/18bdb7b8a3e3470dadacdb993f246c14.jpeg');
+            background-size: cover;
+            background-position: center;
+            color: #333;
         }
         #cantina {
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.95);
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             text-align: center;
+            max-width: 400px;
+            width: 100%;
+            position: relative;
+        }
+        h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2C3E50;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 16px;
+            font-weight: 500;
+            color: #2C3E50;
         }
         .item {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         .item img {
-            width: 50px; /* Define a largura da imagem */
-            height: 50px; /* Define a altura da imagem */
+            width: 50px;
+            height: 50px;
+            margin-top: 10px;
+        }
+        .item label {
+            font-size: 16px;
+            font-weight: 500;
+            display: block;
+            margin-top: 10px;
+            color: #34495E;
+        }
+        .item input[type="number"] {
+            margin-top: 5px;
+            padding: 5px;
+            font-size: 14px;
+            width: 60px;
+        }
+        button {
+            background-color: #3498DB;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #2980B9;
+        }
+        #resultado {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #C0392B;
+        }
+        .interacao {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #8E44AD;
+            font-weight: 500;
+        }
+        #saldo {
+            position: absolute;
+            bottom: -20px; /* Ajusta a posição para ficar fora do contêiner */
+            right: 0;
+            background-color: #F1C40F;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+            transform: translateY(50%); /* Centraliza verticalmente */
+        }
+        /* Responsividade */
+        @media (max-width: 600px) {
+            #cantina {
+                max-width: 90%;
+                padding: 15px;
+            }
+            h2 {
+                font-size: 20px;
+            }
+            p, .item label, .item input[type="number"] {
+                font-size: 14px;
+            }
+            button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+            #resultado {
+                font-size: 16px;
+            }
+            #saldo {
+                font-size: 16px;
+                padding: 8px;
+                bottom: -25px; /* Ajusta a posição para dispositivos menores */
+                right: 0;
+            }
+        }
+        @media (max-width: 400px) {
+            h2 {
+                font-size: 18px;
+            }
+            button {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            #saldo {
+                font-size: 14px;
+                padding: 5px;
+                bottom: -25px; /* Ajusta a posição para dispositivos menores */
+                right: 0;
+            }
         }
     </style>
 </head>
 <body>
     <div id="cantina">
         <h2>Cantina da Escola Total</h2>
+        <div id="saldo">Saldo: R$30,00</div>
         <form id="pedido">
-            <p>Escolha os itens:</p>
+            <p><strong>Escolha os itens:</strong></p>
             <div class="item">
                 <label for="refrigerante">
                     <input type="checkbox" id="refrigerante" name="item" value="Refrigerante">
                     <img src="refrigerante.jpeg" alt="Refrigerante">
-                    <br>Refrigerante - R$3,50
+                    <br><strong>Refrigerante</strong> - R$3,50
                 </label>
                 <br>Quantidade:
                 <input type="number" id="quantidade-refrigerante" name="quantidade-refrigerante" min="0" max="10" value="0">
+                <p class="interacao" id="interacao-refrigerante"></p>
             </div>
             <div class="item">
                 <label for="bolo">
                     <input type="checkbox" id="bolo" name="item" value="Bolo">
                     <img src="bolo.jpg" alt="Bolo">
-                    <br>Bolo - R$2,50
+                    <br><strong>Bolo</strong> - R$2,50
                 </label>
                 <br>Quantidade:
                 <input type="number" id="quantidade-bolo" name="quantidade-bolo" min="0" max="10" value="0">
+                <p class="interacao" id="interacao-bolo"></p>
             </div>
             <div class="item">
                 <label for="agua">
                     <input type="checkbox" id="agua" name="item" value="Agua">
                     <img src="agua.jpeg" alt="Água">
-                    <br>Água - R$2,00
+                    <br><strong>Água</strong> - R$2,00
                 </label>
                 <br>Quantidade:
                 <input type="number" id="quantidade-agua" name="quantidade-agua" min="0" max="10" value="0">
+                <p class="interacao" id="interacao-agua"></p>
             </div>
             <br>
             <button type="submit">Calcular</button>
@@ -70,15 +186,64 @@
     </div>
 
     <script>
-        document.getElementById('pedido').addEventListener('submit', function(event) {
-            event.preventDefault();
+        // Mensagem de boas-vindas
+        window.onload = function() {
+            alert("Bem-vindo à Cantina da Escola Total! Escolha seus itens favoritos.");
+        };
 
+        // Função para mostrar interações
+        function mostrarInteracao(id, mensagem) {
+            var elementoInteracao = document.getElementById('interacao-' + id);
+            elementoInteracao.textContent = mensagem;
+        }
+
+        // Função para atualizar o saldo
+        function atualizarSaldo(valorTotal) {
+            var saldoRestante = 30 - valorTotal;
+            document.getElementById('saldo').textContent = "Saldo: R$" + saldoRestante.toFixed(2);
+        }
+
+        // Adicionar ouvintes de eventos para os checkboxes
+        document.getElementById('refrigerante').addEventListener('change', function(event) {
+            if (event.target.checked) {
+                mostrarInteracao('refrigerante', "Que delícia! Um refrigerante gelado para refrescar.");
+            } else {
+                mostrarInteracao('refrigerante', "");
+            }
+            calcularTotal(); // Atualiza o total sempre que a seleção muda
+        });
+
+        document.getElementById('bolo').addEventListener('change', function(event) {
+            if (event.target.checked) {
+                mostrarInteracao('bolo', "Hmm, bolo fresquinho! Perfeito para acompanhar.");
+            } else {
+                mostrarInteracao('bolo', "");
+            }
+            calcularTotal(); // Atualiza o total sempre que a seleção muda
+        });
+
+        document.getElementById('agua').addEventListener('change', function(event) {
+            if (event.target.checked) {
+                mostrarInteracao('agua', "Água é essencial! Fique hidratado.");
+            } else {
+                mostrarInteracao('agua', "");
+            }
+            calcularTotal(); // Atualiza o total sempre que a seleção muda
+        });
+
+        // Adicionar ouvintes de eventos para os inputs de quantidade
+        document.querySelectorAll('.item input[type="number"]').forEach(function(input) {
+            input.addEventListener('input', calcularTotal);
+        });
+
+        // Função para calcular o total e atualizar o saldo
+        function calcularTotal() {
             var items = document.querySelectorAll('input[name="item"]:checked');
             var valorTotal = 0;
             var precos = {
                 'Refrigerante': 3.5,
                 'Bolo': 2.5,
-                'Agua': 2
+                'Agua': 2.0
             };
 
             items.forEach(function(item) {
@@ -90,10 +255,45 @@
                 }
             });
 
+            // Atualiza o saldo
+            atualizarSaldo(valorTotal);
+        }
+
+        // Calculadora de valores ao enviar o formulário
+        document.getElementById('pedido').addEventListener('submit', function(event) {
+            event.preventDefault(); // Impede o envio do formulário
+            
+            var items = document.querySelectorAll('input[name="item"]:checked');
+            var valorTotal = 0;
+            var nenhumItemSelecionado = items.length === 0;
+            var precos = {
+                'Refrigerante': 3.5,
+                'Bolo': 2.5,
+                'Agua': 2.0
+            };
+
+            // Verifica se nenhum item foi selecionado
+            if (nenhumItemSelecionado) {
+                document.getElementById('resultado').textContent = "Nenhum item escolhido, escolha um item para calcular o valor.";
+                return;
+            }
+
+            // Calcula o valor total
+            items.forEach(function(item) {
+                var quantidadeInput = document.getElementById('quantidade-' + item.value.toLowerCase());
+                var quantidade = parseInt(quantidadeInput.value);
+
+                if (!isNaN(quantidade) && quantidade > 0) {
+                    valorTotal += precos[item.value] * quantidade;
+                }
+            });
+
+            // Verifica se o valor total excede 30 reais
             if (valorTotal > 30) {
                 document.getElementById('resultado').textContent = "O valor total excede R$30. Por favor, escolha menos itens.";
             } else {
-                document.getElementById('resultado').textContent = "O valor total é R$" + valorTotal.toFixed(2);
+                var troco = 30 - valorTotal;
+                document.getElementById('resultado').textContent = "O valor total é R$" + valorTotal.toFixed(2) + ". Seu troco será R$" + troco.toFixed(2) + ".";
             }
         });
     </script>
