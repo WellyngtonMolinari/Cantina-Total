@@ -90,15 +90,14 @@
         }
         #saldo {
             position: absolute;
-            bottom: -20px; /* Ajusta a posição para ficar fora do contêiner */
-            right: 0;
+            top: 10px; /* Ajusta a posição para o topo do contêiner */
+            left: 10px; /* Ajusta a posição para a esquerda do contêiner */
             background-color: #F1C40F;
-            padding: 10px;
+            padding: 5px 10px;
             border-radius: 5px;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
             color: #333;
-            transform: translateY(50%); /* Centraliza verticalmente */
         }
         /* Responsividade */
         @media (max-width: 600px) {
@@ -120,10 +119,10 @@
                 font-size: 16px;
             }
             #saldo {
-                font-size: 16px;
-                padding: 8px;
-                bottom: -25px; /* Ajusta a posição para dispositivos menores */
-                right: 0;
+                font-size: 14px;
+                padding: 5px;
+                top: 5px; /* Ajusta a posição para dispositivos menores */
+                left: 5px;
             }
         }
         @media (max-width: 400px) {
@@ -135,10 +134,10 @@
                 font-size: 12px;
             }
             #saldo {
-                font-size: 14px;
-                padding: 5px;
-                bottom: -25px; /* Ajusta a posição para dispositivos menores */
-                right: 0;
+                font-size: 12px;
+                padding: 4px 8px;
+                top: 5px; /* Ajusta a posição para dispositivos menores */
+                left: 5px;
             }
         }
     </style>
